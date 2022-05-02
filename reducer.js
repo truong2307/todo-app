@@ -2,12 +2,11 @@ import storage from "./utitlity/storage.js"
 
 const init = {
     todos: storage.get(),
-    filter: 'all',
     buttonActive: 'all',
     filters:{
         all: () => true,
-        active: todo => !todo.complete,
-        complete: todo => todo.complete,
+        active: todo => todo.complete === false,
+        complete: todo => todo.complete === true,
     }
 
 }
@@ -39,9 +38,7 @@ const actions = {
         state.buttonActive = activeBtnValue;
     },
     clearAllComplete(state){
-        state.todos.filter(todo => todo.complete === true)
-            .forEach(todo => todo.complete = false);
-
+        state.todos = state.todos.filter(todo => todo.complete === false);
         storage.set(state.todos);
     }
 }
