@@ -7,12 +7,17 @@ const init = {
 
 const actions = {
     add(state, title){
-        if(title.length > 0)
+        if(title)
         state.todos.push({
             title: title,
             complete: false
         })
         storage.set(state.todos)
+    },
+    toggle(state, index){
+        const todoNeedChange = state.todos[index];
+        todoNeedChange.complete = !todoNeedChange.complete
+        
     }
 }
 
