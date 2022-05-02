@@ -1,8 +1,9 @@
 import html from '../core.js'
-import TodoItem from '../component/TodoItem.js'
- 
-function Footer(){
-    return html`
+import {connect} from '../store.js'
+
+function Footer({todos}){
+    if(todos.length > 0){
+        return html`
         <footer class="footer">
             <span class="todo-count"><strong>0</strong> item left</span>
             <ul class="filters">
@@ -19,6 +20,7 @@ function Footer(){
             <button class="clear-completed">Clear completed</button>
         </footer>
     `
+    }
 }
 
-export default Footer
+export default connect()(Footer)
