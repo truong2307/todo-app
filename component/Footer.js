@@ -1,23 +1,32 @@
 import html from '../core.js'
 import {connect} from '../store.js'
+import commonConst from '../utitlity/commonConst.js'
 
-function Footer({todos}){
+function Footer({todos, filters, buttonActive}){
     if(todos.length > 0){
+        const keyOfFiltersArr = Object.keys(filters);
         return html`
         <footer class="footer">
-            <span class="todo-count"><strong>0</strong> item left</span>
+            <span class="todo-count">
+            <strong>
+                ${todos.filter(todo => todo.complete === true).length}
+            </strong> item left</span>
             <ul class="filters">
-                <li>
-                    <a class="selected" href="#/">All</a>
-                </li>
-                <li>
-                    <a href="#/active">Active</a>
-                </li>
-                <li>
-                    <a href="#/completed">Completed</a>
-                </li>
+                
+                ${keyOfFiltersArr.map(key => html`
+                    <li>
+                        <a onclick="dispatch('${commonConst.ACTIVE_BUTTON}', '${key}')" class="${buttonActive === key && 'selected'}" 
+                        href="#">
+                        ${key[0].toUpperCase() + key.slice(1, key.length)}
+                    </a>
+                        
+                    </li>
+                `)}
             </ul>
+
+            ${todos.some(todo => todo.complete === true) && html`
             <button class="clear-completed">Clear completed</button>
+            `}
         </footer>
     `
     }
