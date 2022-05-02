@@ -21,6 +21,11 @@ const actions = {
         })
         storage.set(state.todos);
     },
+    destroyItem(state, index){
+        state.todos.splice(index, 1);
+
+        storage.set(state.todos);
+    },
     toggle(state, index){
         const todoNeedChange = state.todos[index];
         todoNeedChange.complete = !todoNeedChange.complete
@@ -31,7 +36,13 @@ const actions = {
         storage.set(state.todos);
     },
     activeBtn(state, activeBtnValue){
-        state.buttonActive = activeBtnValue
+        state.buttonActive = activeBtnValue;
+    },
+    clearAllComplete(state){
+        state.todos.filter(todo => todo.complete === true)
+            .forEach(todo => todo.complete = false);
+
+        storage.set(state.todos);
     }
 }
 

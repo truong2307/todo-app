@@ -15,7 +15,7 @@ function Footer({todos, filters, buttonActive}){
                 
                 ${keyOfFiltersArr.map(key => html`
                     <li>
-                        <a onclick="dispatch('${commonConst.ACTIVE_BUTTON}', '${key}')" class="${buttonActive === key && 'selected'}" 
+                        <a onclick="dispatch('${commonConst.ACTIVE_BUTTON_ACTION}', '${key}')" class="${buttonActive === key && 'selected'}" 
                         href="#">
                         ${key[0].toUpperCase() + key.slice(1, key.length)}
                     </a>
@@ -25,7 +25,7 @@ function Footer({todos, filters, buttonActive}){
             </ul>
 
             ${todos.some(todo => todo.complete === true) && html`
-            <button class="clear-completed">Clear completed</button>
+            <button onclick="dispatch('${commonConst.CLEAR_ALL_COMPLETE_ACTION}')" class="clear-completed">Clear completed</button>
             `}
         </footer>
     `

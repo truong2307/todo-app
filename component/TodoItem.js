@@ -9,7 +9,7 @@ function TodoItem({ todo, index }){
                 onchange="dispatch('${commonConst.TOGGLE_ACTION}', ${index})"
                 type="checkbox" ${todo.complete && 'checked'}>
                 <label>${todo.title}</label>
-                <button class="destroy"></button>
+                <button onclick="dispatch('${commonConst.DESTROY_ITEM}', ${index})" class="destroy"></button>
             </div>
             <input class="edit" value="${todo.title}">
         </li>
