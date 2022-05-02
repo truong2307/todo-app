@@ -4,7 +4,7 @@ import {connect} from '../store.js'
 import commonConst from '../utitlity/commonConst.js'
 
  
-function TodoList({todos, filters, buttonActive}){
+function TodoList({todos, filters, buttonActive, editPlace}){
     return html`
         <section class="main">
             <input onchange="dispatch('${commonConst.TOGGLE_ALL_ACTION}', this.checked)" 
@@ -14,7 +14,7 @@ function TodoList({todos, filters, buttonActive}){
             <ul class="todo-list">
                 ${todos
                     .filter(todo => filters[buttonActive](todo))
-                    .map((todo, index) => TodoItem({todo, index}))}
+                    .map((todo, index) => TodoItem({todo, index, editPlace}))}
             </ul>
         </section>
     `
